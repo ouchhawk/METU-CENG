@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/ugur_/CLionProjects/hw3/fat32.h
+sys/types.h
+-
+fcntl.h
+-
+cstdio
+-
+iostream
+-
+unistd.h
+-
+string
+-
+cstring
+-
+cstdlib
+-
+vector
+-
+time.h
+-
+
+/mnt/c/Users/ugur_/CLionProjects/hw3/main.cpp
+fat32.h
+/mnt/c/Users/ugur_/CLionProjects/hw3/fat32.h
+

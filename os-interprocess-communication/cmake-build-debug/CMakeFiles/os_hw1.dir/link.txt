@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/os_hw1.dir/oshw1.cpp.o  -o os_hw1 

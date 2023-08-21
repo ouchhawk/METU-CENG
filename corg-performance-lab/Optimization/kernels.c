@@ -1,0 +1,437 @@
+/********************************************************
+ * Kernels to be optimized for the CS:APP Performance Lab
+ ********************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "defs.h"
+
+/***************
+ * CONVOLUTION KERNEL
+ ***************/
+
+/******************************************************
+ * Your different versions of the convolution functions  go here
+ ******************************************************/
+
+/* 
+ * naive_conv - The naive baseline version of convolution 
+ */
+char naive_conv_descr[] = "naive_conv: Naive baseline implementation";
+void naive_conv(int dim,int *src, int *ker,int *dst) {
+    int i,j,k,l;
+
+    for(i = 0; i < dim-8+1; i++)
+        for(j = 0; j < dim-8+1; j++) {
+            dst[j*dim+i] = 0;
+            for(k = 0; k < 8; k++)
+                for(l = 0; l < 8; l++) {
+                    dst[j*dim+i] = dst[j*dim+i] +src[(j+l)*dim+(i+k)]*ker[l*dim+k];
+                }
+        }
+}
+
+/* 
+ * convolution - Your current working version of convolution
+ * IMPORTANT: This is the version you will be graded on
+ */
+char convolution_descr[] = "Dot product: Current working version";
+void convolution(int dim,int *src, int *ker,int *dst) 
+{
+    int i,j, j1,j2,j3,j4,j5,j6,j7,var;
+	int jdim,j1dim,j2dim,j3dim,j4dim,j5dim,j6dim,j7dim;
+	int dim7=dim-7;
+	int jdimi;
+
+	int dim2=dim<<1;
+	int a3dim=dim+dim+dim;
+	int dim4=dim<<2;
+	int a5dim=dim+dim+dim+dim+dim;
+	int a6dim=dim+dim+dim+dim+dim+dim;
+	int a7dim=dim+dim+dim+dim+dim+dim+dim;
+
+		j=0;
+		loop1:
+			if (j>=dim7) goto done1;
+			j1=j+1;
+			j2=j+2;
+			j3=j+3;
+			j4=j+4;
+			j5=j+5;
+			j6=j+6;
+			j7=j+7;
+			jdim=j*dim;
+			j1dim=j1*dim;
+			j2dim=j2*dim;
+			j3dim=j3*dim;
+			j4dim=j4*dim;
+			j5dim=j5*dim;
+			j6dim=j6*dim;
+			j7dim=j7*dim;
+		i=0;
+		loop2:
+			if (i>=dim7) goto done2;
+			jdimi=j*dim+i;
+            dst[jdimi]=0;
+            var=0;
+					var += src[jdim+(i+0)]*ker[0];
+					var += src[jdim+(i+1)]*ker[1];
+					var += src[jdim+(i+2)]*ker[2];
+					var += src[jdim+(i+3)]*ker[3];
+					var += src[jdim+(i+4)]*ker[4];
+					var += src[jdim+(i+5)]*ker[5];
+					var += src[jdim+(i+6)]*ker[6];
+					var += src[jdim+(i+7)]*ker[7];
+
+					var += src[j1dim+(i+0)]*ker[dim+0];
+					var += src[j1dim+(i+1)]*ker[dim+1];
+					var += src[j1dim+(i+2)]*ker[dim+2];
+					var += src[j1dim+(i+3)]*ker[dim+3];
+					var += src[j1dim+(i+4)]*ker[dim+4];
+					var += src[j1dim+(i+5)]*ker[dim+5];
+					var += src[j1dim+(i+6)]*ker[dim+6];
+					var += src[j1dim+(i+7)]*ker[dim+7];
+
+					var += src[j2dim+(i+0)]*ker[dim2+0];
+					var += src[j2dim+(i+1)]*ker[dim2+1];
+					var += src[j2dim+(i+2)]*ker[dim2+2];
+					var += src[j2dim+(i+3)]*ker[dim2+3];
+					var += src[j2dim+(i+4)]*ker[dim2+4];
+					var += src[j2dim+(i+5)]*ker[dim2+5];
+					var += src[j2dim+(i+6)]*ker[dim2+6];
+					var += src[j2dim+(i+7)]*ker[dim2+7];
+
+					var += src[j3dim+(i+0)]*ker[a3dim+0];
+					var += src[j3dim+(i+1)]*ker[a3dim+1];
+					var += src[j3dim+(i+2)]*ker[a3dim+2];
+					var += src[j3dim+(i+3)]*ker[a3dim+3];
+					var += src[j3dim+(i+4)]*ker[a3dim+4];
+					var += src[j3dim+(i+5)]*ker[a3dim+5];
+					var += src[j3dim+(i+6)]*ker[a3dim+6];
+					var += src[j3dim+(i+7)]*ker[a3dim+7];
+
+					var += src[j4dim+(i+0)]*ker[dim4+0];
+					var += src[j4dim+(i+1)]*ker[dim4+1];
+					var += src[j4dim+(i+2)]*ker[dim4+2];
+					var += src[j4dim+(i+3)]*ker[dim4+3];
+					var += src[j4dim+(i+4)]*ker[dim4+4];
+					var += src[j4dim+(i+5)]*ker[dim4+5];
+					var += src[j4dim+(i+6)]*ker[dim4+6];
+					var += src[j4dim+(i+7)]*ker[dim4+7];
+
+					var += src[j5dim+(i+0)]*ker[a5dim+0];
+					var += src[j5dim+(i+1)]*ker[a5dim+1];
+					var += src[j5dim+(i+2)]*ker[a5dim+2];
+					var += src[j5dim+(i+3)]*ker[a5dim+3];
+					var += src[j5dim+(i+4)]*ker[a5dim+4];
+					var += src[j5dim+(i+5)]*ker[a5dim+5];
+					var += src[j5dim+(i+6)]*ker[a5dim+6];
+					var += src[j5dim+(i+7)]*ker[a5dim+7];
+
+					var += src[j6dim+(i+0)]*ker[a6dim+0];
+					var += src[j6dim+(i+1)]*ker[a6dim+1];
+					var += src[j6dim+(i+2)]*ker[a6dim+2];
+					var += src[j6dim+(i+3)]*ker[a6dim+3];
+					var += src[j6dim+(i+4)]*ker[a6dim+4];
+					var += src[j6dim+(i+5)]*ker[a6dim+5];
+					var += src[j6dim+(i+6)]*ker[a6dim+6];
+					var += src[j6dim+(i+7)]*ker[a6dim+7];
+
+					var += src[j7dim+(i+0)]*ker[a7dim+0];
+					var += src[j7dim+(i+1)]*ker[a7dim+1];
+					var += src[j7dim+(i+2)]*ker[a7dim+2];
+					var += src[j7dim+(i+3)]*ker[a7dim+3];
+					var += src[j7dim+(i+4)]*ker[a7dim+4];
+					var += src[j7dim+(i+5)]*ker[a7dim+5];
+					var += src[j7dim+(i+6)]*ker[a7dim+6];
+					var += src[j7dim+(i+7)]*ker[a7dim+7];
+					
+					dst[jdimi]=var;
+
+					i++;
+				done2:
+					if (i<dim7) goto loop2;
+        	
+        j++;
+        done1:
+        	if (j<dim7) goto loop1;
+    }   
+
+/*********************************************************************
+ * register_conv_functions - Register all of your different versions
+ *     of the convolution functions  with the driver by calling the
+ *     add_conv_function() for each test function. When you run the
+ *     driver program, it will test and report the performance of each
+ *     registered test function.  
+ *********************************************************************/
+
+void register_conv_functions() {
+    add_conv_function(&naive_conv, naive_conv_descr);   
+    add_conv_function(&convolution, convolution_descr);   
+    /* ... Register additional test functions here */
+}
+
+/***************
+ * MATRIX MULTIP KERNEL
+ ***************/
+
+/******************************************************
+ * Your different versions of the matrix multiplications  go here
+ ******************************************************/
+
+/* 
+ * naive_matrix_multiplication - The naive baseline version of matrix multiplication 
+ */
+char naive_matrix_multiplication_descr[] = "Naive_matrix_multiplication: Naive baseline implementation";
+void naive_matrix_multiplication(int dim,int *src, int *src2,int *dst) {
+    int i,j,k;
+
+    for(i = 0; i < dim; i++)
+        for(j = 0; j < dim; j++) {
+            dst[j*dim+i]=0;
+            for(k = 0; k < dim; k++) 
+                dst[j*dim+i] = dst[j*dim+i] + src[j*dim+k]*src2[i+k*dim];
+        }    
+}
+
+/* 
+ * matrix_multiplication - Your current working version of matrix_multiplication
+ * IMPORTANT: This is the version you will be graded on
+ */
+char matrix_multiplication_descr[] = "Matrix multiplications: Current working version";
+void matrix_multiplication(int dim,int *src, int *src2,int *dst) 
+{
+	int j, jdimi,jkdim,dimij,var;
+
+	for(int i = 0; i < dim; i++){
+		for (j = 0; j < dim;) {
+			dimij=dim*i+j;
+    		dst[dimij]=0;
+    		dst[dimij+1]=0;
+    		dst[dimij+2]=0;
+    		dst[dimij+3]=0;
+    		dst[dimij+4]=0;
+    		dst[dimij+5]=0;
+    		dst[dimij+6]=0;
+    		dst[dimij+7]=0;
+    		dst[dimij+8]=0;
+    		dst[dimij+9]=0;
+    		dst[dimij+10]=0;
+    		dst[dimij+11]=0;
+    		dst[dimij+12]=0;
+    		dst[dimij+13]=0;
+    		dst[dimij+14]=0;
+    		dst[dimij+15]=0;
+    		dst[dimij+16]=0;
+    		dst[dimij+17]=0;
+    		dst[dimij+18]=0;
+    		dst[dimij+19]=0;
+    		dst[dimij+20]=0;
+    		dst[dimij+21]=0;
+    		dst[dimij+22]=0;
+    		dst[dimij+23]=0;
+    		dst[dimij+24]=0;
+    		dst[dimij+25]=0;
+    		dst[dimij+26]=0;
+    		dst[dimij+27]=0;
+    		dst[dimij+28]=0;
+    		dst[dimij+29]=0;
+    		dst[dimij+30]=0;
+    		dst[dimij+31]=0;
+    		j=j+32;
+    	}
+
+	        for(int k = 0; k < dim;) {
+				
+            j=0;
+            loop1:
+            	if (j>=dim) goto done1;
+            	jdimi=j+dim*i;
+            	jkdim=j+k*dim;
+            	var=src[dim*i+k];
+                dst[jdimi+0] += var*src2[jkdim+0];
+                dst[jdimi+1] += var*src2[jkdim+1];
+                dst[jdimi+2] += var*src2[jkdim+2];
+                dst[jdimi+3] += var*src2[jkdim+3];
+                dst[jdimi+4] += var*src2[jkdim+4];
+                dst[jdimi+5] += var*src2[jkdim+5];
+                dst[jdimi+6] += var*src2[jkdim+6];
+                dst[jdimi+7] += var*src2[jkdim+7];
+                dst[jdimi+8] += var*src2[jkdim+8];
+                dst[jdimi+9] += var*src2[jkdim+9];
+                dst[jdimi+10] += var*src2[jkdim+10];
+                dst[jdimi+11] += var*src2[jkdim+11];
+                dst[jdimi+12] += var*src2[jkdim+12];
+                dst[jdimi+13] += var*src2[jkdim+13];
+                dst[jdimi+14] += var*src2[jkdim+14];
+                dst[jdimi+15] += var*src2[jkdim+15];
+                dst[jdimi+16] += var*src2[jkdim+16];
+                dst[jdimi+17] += var*src2[jkdim+17];
+                dst[jdimi+18] += var*src2[jkdim+18];
+                dst[jdimi+19] += var*src2[jkdim+19];
+                dst[jdimi+20] += var*src2[jkdim+20];
+                dst[jdimi+21] += var*src2[jkdim+21];
+                dst[jdimi+22] += var*src2[jkdim+22];
+                dst[jdimi+23] += var*src2[jkdim+23];
+                dst[jdimi+24] += var*src2[jkdim+24];
+                dst[jdimi+25] += var*src2[jkdim+25];
+                dst[jdimi+26] += var*src2[jkdim+26];
+                dst[jdimi+27] += var*src2[jkdim+27];
+                dst[jdimi+28] += var*src2[jkdim+28];
+                dst[jdimi+29] += var*src2[jkdim+29];
+                dst[jdimi+30] += var*src2[jkdim+30];
+                dst[jdimi+31] += var*src2[jkdim+31];
+            	j=j+32;
+            done1:
+            	if(j<dim) goto loop1;
+            k++;
+
+        	j=0;
+            loop2:
+            	if (j>=dim) goto done2;
+            	jdimi=j+dim*i;
+            	jkdim=j+k*dim;
+				var=src[dim*i+k];
+                dst[jdimi+0] += var*src2[jkdim+0];
+                dst[jdimi+1] += var*src2[jkdim+1];
+                dst[jdimi+2] += var*src2[jkdim+2];
+                dst[jdimi+3] += var*src2[jkdim+3];
+                dst[jdimi+4] += var*src2[jkdim+4];
+                dst[jdimi+5] += var*src2[jkdim+5];
+                dst[jdimi+6] += var*src2[jkdim+6];
+                dst[jdimi+7] += var*src2[jkdim+7];
+                dst[jdimi+8] += var*src2[jkdim+8];
+                dst[jdimi+9] += var*src2[jkdim+9];
+                dst[jdimi+10] += var*src2[jkdim+10];
+                dst[jdimi+11] += var*src2[jkdim+11];
+                dst[jdimi+12] += var*src2[jkdim+12];
+                dst[jdimi+13] += var*src2[jkdim+13];
+                dst[jdimi+14] += var*src2[jkdim+14];
+                dst[jdimi+15] += var*src2[jkdim+15];
+                dst[jdimi+16] += var*src2[jkdim+16];
+                dst[jdimi+17] += var*src2[jkdim+17];
+                dst[jdimi+18] += var*src2[jkdim+18];
+                dst[jdimi+19] += var*src2[jkdim+19];
+                dst[jdimi+20] += var*src2[jkdim+20];
+                dst[jdimi+21] += var*src2[jkdim+21];
+                dst[jdimi+22] += var*src2[jkdim+22];
+                dst[jdimi+23] += var*src2[jkdim+23];
+                dst[jdimi+24] += var*src2[jkdim+24];
+                dst[jdimi+25] += var*src2[jkdim+25];
+                dst[jdimi+26] += var*src2[jkdim+26];
+                dst[jdimi+27] += var*src2[jkdim+27];
+                dst[jdimi+28] += var*src2[jkdim+28];
+                dst[jdimi+29] += var*src2[jkdim+29];
+                dst[jdimi+30] += var*src2[jkdim+30];
+                dst[jdimi+31] += var*src2[jkdim+31];
+            	j=j+32;
+            done2:
+            	if(j<dim) goto loop2;
+           k++;
+
+        	j=0;
+            loop3:
+            	if (j>=dim) goto done3;
+            	jdimi=j+dim*i;
+            	jkdim=j+k*dim;
+				var=src[dim*i+k];
+                dst[jdimi+0] += var*src2[jkdim+0];
+                dst[jdimi+1] += var*src2[jkdim+1];
+                dst[jdimi+2] += var*src2[jkdim+2];
+                dst[jdimi+3] += var*src2[jkdim+3];
+                dst[jdimi+4] += var*src2[jkdim+4];
+                dst[jdimi+5] += var*src2[jkdim+5];
+                dst[jdimi+6] += var*src2[jkdim+6];
+                dst[jdimi+7] += var*src2[jkdim+7];
+                dst[jdimi+8] += var*src2[jkdim+8];
+                dst[jdimi+9] += var*src2[jkdim+9];
+                dst[jdimi+10] += var*src2[jkdim+10];
+                dst[jdimi+11] += var*src2[jkdim+11];
+                dst[jdimi+12] += var*src2[jkdim+12];
+                dst[jdimi+13] += var*src2[jkdim+13];
+                dst[jdimi+14] += var*src2[jkdim+14];
+                dst[jdimi+15] += var*src2[jkdim+15];
+                dst[jdimi+16] += var*src2[jkdim+16];
+                dst[jdimi+17] += var*src2[jkdim+17];
+                dst[jdimi+18] += var*src2[jkdim+18];
+                dst[jdimi+19] += var*src2[jkdim+19];
+                dst[jdimi+20] += var*src2[jkdim+20];
+                dst[jdimi+21] += var*src2[jkdim+21];
+                dst[jdimi+22] += var*src2[jkdim+22];
+                dst[jdimi+23] += var*src2[jkdim+23];
+                dst[jdimi+24] += var*src2[jkdim+24];
+                dst[jdimi+25] += var*src2[jkdim+25];
+                dst[jdimi+26] += var*src2[jkdim+26];
+                dst[jdimi+27] += var*src2[jkdim+27];
+                dst[jdimi+28] += var*src2[jkdim+28];
+                dst[jdimi+29] += var*src2[jkdim+29];
+                dst[jdimi+30] += var*src2[jkdim+30];
+                dst[jdimi+31] += var*src2[jkdim+31];
+            	j=j+32;
+            done3:
+            	if(j<dim) goto loop3;
+            k++;
+
+
+        	j=0;
+            loop4:
+            	if (j>=dim) goto done4;
+            	jdimi=j+dim*i;
+            	jkdim=j+k*dim;
+				var=src[dim*i+k];
+                dst[jdimi+0] += var*src2[jkdim+0];
+                dst[jdimi+1] += var*src2[jkdim+1];
+                dst[jdimi+2] += var*src2[jkdim+2];
+                dst[jdimi+3] += var*src2[jkdim+3];
+                dst[jdimi+4] += var*src2[jkdim+4];
+                dst[jdimi+5] += var*src2[jkdim+5];
+                dst[jdimi+6] += var*src2[jkdim+6];
+                dst[jdimi+7] += var*src2[jkdim+7];
+                dst[jdimi+8] += var*src2[jkdim+8];
+                dst[jdimi+9] += var*src2[jkdim+9];
+                dst[jdimi+10] += var*src2[jkdim+10];
+                dst[jdimi+11] += var*src2[jkdim+11];
+                dst[jdimi+12] += var*src2[jkdim+12];
+                dst[jdimi+13] += var*src2[jkdim+13];
+                dst[jdimi+14] += var*src2[jkdim+14];
+                dst[jdimi+15] += var*src2[jkdim+15];
+                dst[jdimi+16] += var*src2[jkdim+16];
+                dst[jdimi+17] += var*src2[jkdim+17];
+                dst[jdimi+18] += var*src2[jkdim+18];
+                dst[jdimi+19] += var*src2[jkdim+19];
+                dst[jdimi+20] += var*src2[jkdim+20];
+                dst[jdimi+21] += var*src2[jkdim+21];
+                dst[jdimi+22] += var*src2[jkdim+22];
+                dst[jdimi+23] += var*src2[jkdim+23];
+                dst[jdimi+24] += var*src2[jkdim+24];
+                dst[jdimi+25] += var*src2[jkdim+25];
+                dst[jdimi+26] += var*src2[jkdim+26];
+                dst[jdimi+27] += var*src2[jkdim+27];
+                dst[jdimi+28] += var*src2[jkdim+28];
+                dst[jdimi+29] += var*src2[jkdim+29];
+                dst[jdimi+30] += var*src2[jkdim+30];
+                dst[jdimi+31] += var*src2[jkdim+31];
+            	j=j+32;
+            done4:
+            	if(j<dim) goto loop4;
+            k++;
+
+		}
+	}	
+}
+
+
+/*********************************************************************
+ * register_matrix_multiplication_functions - Register all of your different versions
+ *     of the matrix multiplication  with the driver by calling the
+ *     add_matrix_multiplication_function() for each test function. When you run the
+ *     driver program, it will test and report the performance of each
+ *     registered test function.  
+ *********************************************************************/
+
+void register_matrix_multiplication_functions() {
+    add_matrix_multiplication_function(&naive_matrix_multiplication, naive_matrix_multiplication_descr);   
+    add_matrix_multiplication_function(&matrix_multiplication, matrix_multiplication_descr);   
+    /* ... Register additional test functions here */
+}
+

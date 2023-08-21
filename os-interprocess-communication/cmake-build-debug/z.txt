@@ -1,0 +1,15 @@
+total 152
+-rwxrwxrwx 1 ugur ugur   684 Apr 20 18:56 3.txt
+-rwxrwxrwx 1 ugur ugur 45979 Apr 19 00:45 CMakeCache.txt
+drwxrwxrwx 1 ugur ugur  4096 Apr 22 17:48 CMakeFiles
+-rwxrwxrwx 1 ugur ugur  5126 Apr 19 00:45 Makefile
+drwxrwxrwx 1 ugur ugur  4096 Apr 18 10:03 Testing
+-r-xr-xr-x 1 ugur ugur     0 Apr 20 19:07 Woutput_filename
+-rwxrwxrwx 1 ugur ugur  2123 Apr 20 19:08 YY.txt
+-rwxrwxrwx 1 ugur ugur  1643 Apr 19 00:45 cmake_install.cmake
+drwxrwxrwx 1 ugur ugur  4096 Apr  9 14:48 coverage
+-rwxrwxrwx 1 ugur ugur 80144 Apr 22 17:46 os_hw1
+-rwxrwxrwx 1 ugur ugur  7403 Apr 19 00:45 os_hw1.cbp
+-rwxrwxrwx 1 ugur ugur     0 Apr 20 17:04 t.txt
+-rwxrwxrwx 1 ugur ugur     0 Apr 20 17:09 z.txt
+-r-xr-xr-x 1 ugur ugur   495 Apr 20 16:14 �����

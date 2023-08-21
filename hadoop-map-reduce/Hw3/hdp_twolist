@@ -1,0 +1,7 @@
+#!/bin/bash
+
+hdfs dfs -rm -R  /output_c
+hadoop com.sun.tools.javac.Main *.java
+jar cf Hw3.jar *.class
+hadoop jar Hw3.jar Hw3 twolist /input /output_c
+

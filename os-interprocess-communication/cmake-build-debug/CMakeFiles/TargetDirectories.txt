@@ -1,0 +1,3 @@
+/mnt/d/_CLOUD/Google Drive/_main/CENG334 Introduction to Operating Systems/_2022/os_hw1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/mnt/d/_CLOUD/Google Drive/_main/CENG334 Introduction to Operating Systems/_2022/os_hw1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/mnt/d/_CLOUD/Google Drive/_main/CENG334 Introduction to Operating Systems/_2022/os_hw1/cmake-build-debug/CMakeFiles/os_hw1.dir

